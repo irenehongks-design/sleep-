@@ -364,6 +364,15 @@ const questions = [
     sources: [["睡眠知识地图", SOURCE_URLS.sleepMap], ["闭环神经调节睡眠硬件", SOURCE_URLS.hardware]]
   },
   {
+    id: "P-07", domain: "product", status: "researching", evidence: "C", updated: "2026-09-02",
+    title: "智能枕头是否是解决入睡困难的合适产品载体？",
+    answer: "当前结论是不进入 1.0。枕头只有在温度、体位、私密声音或呼吸代理信号中的某一项形成不可替代的干预闭环，并在家庭实验中带来相对手机、耳机或现有 wearable 的增量效果时，才是合理载体。",
+    why: "它把“想做一种硬件”改写为可以比较、可以失败的产品命题。",
+    knowledge: ["温度、声音、体位与呼吸监测对应不同机制。", "舒适度和整夜无感使用可能是枕头的潜在优势。", "传感器更多、离头更近或形态更新颖，并不自动等于效果更好。"],
+    open: ["哪一种机制必须依赖枕头才能完成？", "加入枕头后，核心效果或依从性相对软件方案提高多少才值得承担硬件成本？"],
+    sources: [["AASM｜消费级睡眠技术立场", "https://aasm.org/advocacy/position-statements/consumer-sleep-technology/"], ["AASM｜失眠行为与心理治疗指南", "https://aasm.org/new-guideline-supports-behavioral-psychological-treatments-for-insomnia/"]]
+  },
+  {
     id: "L-01", domain: "longterm", status: "backlog", evidence: "C", updated: "—",
     title: "睡眠碎片化、类淋巴系统与阿尔茨海默病之间是因果关系吗？",
     answer: "现有研究提供了机制线索和关联证据，但从短期生理变化推导到长期疾病预防仍存在巨大跨越，需要区分动物、观察性和干预证据。",
@@ -401,6 +410,159 @@ const questions = [
   }
 ];
 
+const evidenceLibrary = [
+  {
+    id: "E-01", grade: "A", year: "2021", organization: "AASM",
+    type: "临床实践指南", title: "成人慢性失眠的行为与心理治疗",
+    population: "成人慢性失眠患者",
+    finding: "强推荐多组分 CBT-I；对简短治疗、刺激控制、睡眠限制和放松治疗作条件推荐；不建议把睡眠卫生单独作为治疗。",
+    effect: "指南依据系统证据分级，不提供一个可跨干预使用的单一效应量。",
+    limitation: "适用于慢性失眠的治疗证据，不能直接外推为所有泛健康用户的产品效果。",
+    decision: "把 CBT-I 核心成分放入 1.0；放松/呼吸是辅助入口，不以睡眠卫生内容作为完整方案。",
+    url: "https://aasm.org/new-guideline-supports-behavioral-psychological-treatments-for-insomnia/"
+  },
+  {
+    id: "E-02", grade: "B", year: "2020", organization: "Sleep Medicine Reviews",
+    type: "系统综述与 Meta-analysis", title: "数字 CBT-I 与面对面 CBT-I 的效果比较",
+    population: "33 项研究；数字干预 4,719 人，对照 4,645 人",
+    finding: "数字 CBT-I 在干预后、短期随访和一年随访均改善失眠严重度。",
+    effect: "干预后 ISI 均差 −5.00（95% CI −5.68 至 −4.33）；异质性 I²=79%。",
+    limitation: "研究设计与产品差异大；高异质性意味着平均效应不能直接作为单一产品承诺。",
+    decision: "软件优先有依据，但必须为自己的具体产品重新验证效果与依从性。",
+    url: "https://pubmed.ncbi.nlm.nih.gov/32950013/"
+  },
+  {
+    id: "E-03", grade: "B", year: "2025", organization: "Sleep Medicine Reviews",
+    type: "系统综述与 Meta-analysis", title: "全自动数字 CBT-I 的随机试验证据",
+    population: "29 项随机对照试验；9,475 名参与者",
+    finding: "全自动数字 CBT-I 对失眠严重度有中到大的干预后平均效果。",
+    effect: "SMD −0.71（95% CI −0.88 至 −0.54）；异质性 I²=91%。",
+    limitation: "极高异质性；不同产品、样本和对照条件下效果不可简单互换。",
+    decision: "AI 可以提高交付和个性化，但不能因为采用 AI 就继承文献中的平均疗效。",
+    url: "https://pubmed.ncbi.nlm.nih.gov/40075149/"
+  },
+  {
+    id: "E-04", grade: "C", year: "2026", organization: "Sleep Medicine Reviews",
+    type: "系统综述", title: "睡前慢呼吸对睡眠的影响",
+    population: "9 项研究；457 名参与者；睡前呼吸频率 ≤10 次/分钟",
+    finding: "主观睡眠时长和质量出现改善信号，部分研究观察到自主神经变化；客观睡眠结果仍不确定。",
+    effect: "研究方法和结局差异较大，综述未给出可用于产品承诺的统一合并效应。",
+    limitation: "证据量小；客观测量研究仅 3 项且均为单日干预，需要更长、更高质量家庭试验。",
+    decision: "可作为低风险的状态切换模块验证，不能宣称其可治疗失眠或稳定改变睡眠结构。",
+    url: "https://www.sciencedirect.com/science/article/pii/S1087079226000560"
+  },
+  {
+    id: "E-05", grade: "A", year: "2017", organization: "AASM",
+    type: "临床实践指南", title: "成人阻塞性睡眠呼吸暂停的诊断检测",
+    population: "疑似 OSA 的成人",
+    finding: "问卷或临床工具不能单独诊断 OSA；在适合人群中应使用 PSG 或技术充分的家庭睡眠呼吸暂停检测。",
+    effect: "诊断指南以推荐强度呈现，不以单一治疗效应量呈现。",
+    limitation: "消费产品可以提示风险，但不能用代理信号取代医学诊断流程。",
+    decision: "产品必须有红旗筛查和转介；不得把枕头、手表或算法输出写成 OSA 诊断。",
+    url: "https://aasm.org/wp-content/uploads/2017/07/diagnostic-testing-OSA.pdf"
+  },
+  {
+    id: "E-06", grade: "A", year: "2018", organization: "AASM",
+    type: "专业立场声明", title: "消费级睡眠技术的临床边界",
+    population: "面向消费者的睡眠技术及其用户",
+    finding: "未经验证或监管许可的消费技术不能用于诊断或治疗睡眠障碍，可用于促进用户与临床医生沟通。",
+    effect: "立场声明，不适用临床效应量。",
+    limitation: "技术更新很快，具体设备仍需查看各自验证研究和适用人群。",
+    decision: "wearable 数据只做趋势与对话线索；产品文案必须区分 wellness、筛查提示和诊断。",
+    url: "https://aasm.org/advocacy/position-statements/consumer-sleep-technology/"
+  },
+  {
+    id: "E-07", grade: "A", year: "2020", organization: "AASM",
+    type: "专业立场声明", title: "人工智能在睡眠医学中的应用",
+    population: "睡眠医学中的 AI 开发者、临床人员与患者",
+    finding: "AI 系统需要明确目标人群和用途，接受独立测试、持续监督并提高透明度。",
+    effect: "立场声明，不适用临床效应量。",
+    limitation: "给出治理原则，不证明任何具体 AI 产品有效。",
+    decision: "AI 的 1.0 角色限定为解释、个性化和依从性支持；关键判断保留人工和转介边界。",
+    url: "https://pubmed.ncbi.nlm.nih.gov/32022674/"
+  },
+  {
+    id: "E-08", grade: "B", year: "2024", organization: "BMC Medical Research Methodology",
+    type: "方法学系统综述", title: "ISI 临床重要变化阈值的使用一致性",
+    population: "81 项使用 ISI 的失眠随机试验",
+    finding: "只有 38.3% 的试验使用 MIC 或 MCID；最常见的个体改善阈值是 ISI 下降 6 分，但已发表阈值并不一致。",
+    effect: "MIC 常见为 6 分、范围 3–8；MCID 常见为 4 分、范围 2.8–4。",
+    limitation: "阈值定义与用途不同，不能把一个数字当成所有人群和产品的统一成功标准。",
+    decision: "把 ISI 下降 ≥6 分作为首轮预注册的内部 responder 门槛，并同时报告连续变化和对照差异。",
+    url: "https://pubmed.ncbi.nlm.nih.gov/39118002/"
+  }
+];
+
+const researchPortfolio = [
+  {
+    index: "01", level: "已有权威解法", title: "把有效方法做得更可及",
+    examples: ["慢性失眠的一线 CBT-I", "刺激控制与睡眠行为调整", "高风险人群的医学转介"],
+    focus: "重点不是重新发明机制，而是降低门槛、提高依从性、保证有效成分不被稀释。",
+    decision: "1.0 核心"
+  },
+  {
+    index: "02", level: "实验有效，产品化未定", title: "验证真实家庭效果折损",
+    examples: ["睡前慢呼吸与放松", "消费级睡眠监测", "声音、温度与闭环干预"],
+    focus: "重点解决传感精度、干预时机、舒适度、依从性，以及从实验室到家庭的效果折损。",
+    decision: "受控试验"
+  },
+  {
+    index: "03", level: "没有稳定答案", title: "形成可失败的原创假设",
+    examples: ["AI 能否改善方法匹配", "睡眠改善能否带动恢复与压力", "专有硬件是否带来增量效果"],
+    focus: "先写清目标人群、可测结果与停止标准，用实验淘汰假设，而不是用趋势支撑故事。",
+    decision: "研究储备"
+  }
+];
+
+const kindLabels = {
+  science: "科学问题",
+  product: "产品问题",
+  strategy: "战略假设"
+};
+
+const questionEvidence = {
+  "M-04": ["E-04"], "T-02": ["E-01", "E-02", "E-04"], "T-04": ["E-05", "E-06"],
+  "Q-01": ["E-05", "E-06"], "Q-02": ["E-08"], "Q-03": ["E-06"],
+  "I-01": ["E-04"], "I-04": ["E-01", "E-04"], "I-06": ["E-01", "E-02", "E-03"],
+  "P-02": ["E-02", "E-03", "E-04"], "P-03": ["E-06"], "P-04": ["E-02", "E-03", "E-06"],
+  "P-06": ["E-05", "E-06"], "P-07": ["E-01", "E-04", "E-06"], "L-04": ["E-07"]
+};
+
+const decisionReadyPlans = {
+  "T-02": {
+    target: "25–45 岁、压力相关入睡困难且无明显医疗红旗的成人",
+    mechanism: "睡前高唤醒与不稳定睡眠行为",
+    carrier: "手机软件；可选接入现有 wearable 趋势",
+    metric: "ISI、睡眠日记 SOL、次日恢复、完成率",
+    experiment: "60 人、2 周基线 + 4 周随机家庭试验",
+    gate: "出现相对对照的效果信号且依从性达标；无安全问题"
+  },
+  "I-01": {
+    target: "睡前主观高唤醒、能够舒适完成慢呼吸的成人",
+    mechanism: "自主神经、注意力与主观安全感的短时状态切换",
+    carrier: "软件音频/触觉引导；不需专有硬件",
+    metric: "练习前后唤醒感、SOL、次日恢复；HRV 仅作探索",
+    experiment: "交叉设计比较慢呼吸、等时安静休息与睡眠卫生内容",
+    gate: "先证明增量效果，再决定是否并入核心方案"
+  },
+  "I-06": {
+    target: "适合数字化 CBT-I、愿意完成结构化训练的成人",
+    mechanism: "保留 CBT-I 核心成分，减少学习和执行摩擦",
+    carrier: "结构化数字课程 + AI 解释与依从性支持",
+    metric: "ISI、模块完成率、脱落率、不良体验",
+    experiment: "数字核心方案对比加入 AI 适应性支持",
+    gate: "依从性提高且疗效不劣于固定数字方案"
+  },
+  "P-07": {
+    target: "首先由已验证干预决定；不能以所有睡眠用户为目标",
+    mechanism: "温度、体位、私密声音或呼吸代理信号必须四选一先验证",
+    carrier: "枕头对比手机、耳机、床垫和现有 wearable",
+    metric: "目标睡眠结果、舒适度、整夜使用率、误报率与增量成本",
+    experiment: "软件方案通过后，再做同一干预的枕头版随机交叉家庭试验",
+    gate: "只有效果或依从性出现可辨别增量才 Go；否则停止硬件"
+  }
+};
+
 const statusLabels = {
   published: "已有研究",
   researching: "研究中",
@@ -409,6 +571,7 @@ const statusLabels = {
 
 const state = {
   domain: "all",
+  kind: "all",
   status: "all",
   search: "",
   activeQuestionId: questions.find((question) => question.id === "Q-01").id
@@ -417,7 +580,10 @@ const state = {
 const elements = {
   domainGrid: document.querySelector("#domain-grid"),
   bookGrid: document.querySelector("#book-grid"),
+  evidenceGrid: document.querySelector("#evidence-grid"),
+  portfolioGrid: document.querySelector("#portfolio-grid"),
   domainFilter: document.querySelector("#domain-filter"),
+  kindFilter: document.querySelector("#kind-filter"),
   statusFilter: document.querySelector("#status-filter"),
   searchInput: document.querySelector("#question-search"),
   resetFilters: document.querySelector("#reset-filters"),
@@ -458,6 +624,41 @@ function renderBooks() {
   `).join("");
 }
 
+function renderEvidence() {
+  elements.evidenceGrid.innerHTML = evidenceLibrary.map((item) => `
+    <article class="evidence-card" id="evidence-${item.id}">
+      <div class="evidence-card-head">
+        <span class="evidence-grade grade-${item.grade.toLowerCase()}">${item.grade}</span>
+        <span>${item.id} · ${item.year}</span>
+      </div>
+      <p class="evidence-type">${item.type} · ${item.organization}</p>
+      <h3><a href="${item.url}" target="_blank" rel="noreferrer">${item.title} ↗</a></h3>
+      <p class="evidence-finding">${item.finding}</p>
+      <p class="effect-line"><strong>效应量 / 推荐：</strong>${item.effect}</p>
+      <details>
+        <summary>查看人群、局限与决策影响 <span aria-hidden="true">＋</span></summary>
+        <dl>
+          <div><dt>研究人群</dt><dd>${item.population}</dd></div>
+          <div><dt>局限性</dt><dd>${item.limitation}</dd></div>
+          <div><dt>产品决策</dt><dd>${item.decision}</dd></div>
+        </dl>
+      </details>
+    </article>
+  `).join("");
+}
+
+function renderPortfolio() {
+  elements.portfolioGrid.innerHTML = researchPortfolio.map((item) => `
+    <article class="portfolio-card">
+      <div class="portfolio-top"><span>${item.index}</span><em>${item.decision}</em></div>
+      <p class="portfolio-level">${item.level}</p>
+      <h3>${item.title}</h3>
+      <ul>${item.examples.map((example) => `<li>${example}</li>`).join("")}</ul>
+      <p class="portfolio-focus"><strong>研究重点：</strong>${item.focus}</p>
+    </article>
+  `).join("");
+}
+
 function getDomain(domainId) {
   return domains.find((domain) => domain.id === domainId);
 }
@@ -466,21 +667,33 @@ function getQuestion(questionId) {
   return questions.find((question) => question.id === questionId);
 }
 
+function getQuestionKind(question) {
+  if (["T-02", "L-04"].includes(question.id)) return "strategy";
+  if (question.domain === "product") return "product";
+  return "science";
+}
+
+function getEvidenceById(evidenceId) {
+  return evidenceLibrary.find((item) => item.id === evidenceId);
+}
+
 function getFilteredQuestions() {
   const normalizedSearch = state.search.trim().toLocaleLowerCase("zh-CN");
   return questions.filter((question) => {
     const matchesDomain = state.domain === "all" || question.domain === state.domain;
+    const matchesKind = state.kind === "all" || getQuestionKind(question) === state.kind;
     const matchesStatus = state.status === "all" || question.status === state.status;
     const haystack = [
       question.id,
       question.title,
       question.answer,
       question.why,
+      kindLabels[getQuestionKind(question)],
       ...question.knowledge,
       ...question.open
     ].join(" ").toLocaleLowerCase("zh-CN");
     const matchesSearch = !normalizedSearch || haystack.includes(normalizedSearch);
-    return matchesDomain && matchesStatus && matchesSearch;
+    return matchesDomain && matchesKind && matchesStatus && matchesSearch;
   });
 }
 
@@ -509,9 +722,11 @@ function renderDomains() {
   document.querySelectorAll("[data-domain-card]").forEach((button) => {
     button.addEventListener("click", () => {
       state.domain = button.dataset.domainCard;
+      state.kind = "all";
       state.status = "all";
       state.search = "";
       elements.domainFilter.value = state.domain;
+      elements.kindFilter.value = "all";
       elements.statusFilter.value = "all";
       elements.searchInput.value = "";
       renderAll();
@@ -530,6 +745,7 @@ function renderFilters() {
     });
   }
   elements.domainFilter.value = state.domain;
+  elements.kindFilter.value = state.kind;
   elements.statusFilter.value = state.status;
   elements.searchInput.value = state.search;
 }
@@ -553,6 +769,7 @@ function renderQuestionList() {
 
   elements.questionList.innerHTML = filteredQuestions.map((question) => {
     const domain = getDomain(question.domain);
+    const kind = getQuestionKind(question);
     const activeClass = state.activeQuestionId === question.id ? " is-active" : "";
     return `
       <button class="question-item${activeClass}" type="button" data-question-id="${question.id}" aria-pressed="${state.activeQuestionId === question.id}">
@@ -560,6 +777,7 @@ function renderQuestionList() {
         <span>
           <span class="question-title">${question.title}</span>
           <span class="question-meta">
+            <span class="kind-tag kind-${kind}">${kindLabels[kind]}</span>
             <span>${domain.name}</span>
             <span>${statusLabels[question.status]}</span>
             <span>证据 ${question.evidence}</span>
@@ -590,15 +808,39 @@ function renderQuestionDetail() {
   const question = getQuestion(state.activeQuestionId);
   if (!question) return;
   const domain = getDomain(question.domain);
+  const kind = getQuestionKind(question);
+  const linkedEvidence = (questionEvidence[question.id] ?? []).map(getEvidenceById).filter(Boolean);
+  const plan = decisionReadyPlans[question.id];
+  const evidenceMarkup = linkedEvidence.length
+    ? linkedEvidence.map((item) => `<li><a href="#evidence-${item.id}"><strong>${item.id} · ${item.grade}</strong><span>${item.title}</span></a></li>`).join("")
+    : `<li class="evidence-gap"><span>尚未绑定外部权威证据；当前内容只能作为研究线索，不能支持产品决策。</span></li>`;
+  const planMarkup = plan ? `
+    <div class="brief-grid">
+      <div><span>目标人群</span><p>${plan.target}</p></div>
+      <div><span>可改变机制</span><p>${plan.mechanism}</p></div>
+      <div><span>软件 / 硬件</span><p>${plan.carrier}</p></div>
+      <div><span>核心指标</span><p>${plan.metric}</p></div>
+      <div><span>最小实验</span><p>${plan.experiment}</p></div>
+      <div><span>决策门槛</span><p>${plan.gate}</p></div>
+    </div>` : `
+    <div class="research-gap-box">
+      <strong>未决策就绪</strong>
+      <p>已有用户痛点、当前答案与未知问题；仍需补齐明确目标人群、可改变机制、软件/硬件方案、核心指标、最小实验和 Go / Adjust / Stop 标准。</p>
+    </div>`;
 
   elements.questionDetail.innerHTML = `
     <div class="detail-topline">
       <span class="status-pill">${statusLabels[question.status]}</span>
+      <span class="kind-tag kind-${kind}">${kindLabels[kind]}</span>
       <span>${domain.name}</span>
       <span>证据等级 ${question.evidence}</span>
       <span>更新 ${question.updated}</span>
     </div>
     <h3>${question.title}</h3>
+    <div class="readiness-banner ${plan ? "is-ready" : "is-gap"}">
+      <strong>${plan ? "已补齐 1.0 决策结构" : "探索中 · 未决策就绪"}</strong>
+      <span>${linkedEvidence.length ? `已绑定 ${linkedEvidence.length} 条外部证据` : "尚无外部权威证据"}</span>
+    </div>
     <span class="detail-label">Current answer</span>
     <p class="detail-copy">${question.answer}</p>
     <span class="detail-label">Why it matters</span>
@@ -607,7 +849,11 @@ function renderQuestionDetail() {
     <ul class="knowledge-list">${question.knowledge.map((point) => `<li>${point}</li>`).join("")}</ul>
     <span class="detail-label">Open questions</span>
     <ul class="open-question-list">${question.open.map((point) => `<li>${point}</li>`).join("")}</ul>
-    <span class="detail-label">Sources &amp; reading</span>
+    <span class="detail-label">Product research brief</span>
+    ${planMarkup}
+    <span class="detail-label">Authoritative evidence</span>
+    <ul class="question-evidence-list">${evidenceMarkup}</ul>
+    <span class="detail-label">Background leads · not evidence</span>
     <ul class="source-list">${question.sources.map(([label, url]) => `<li>${url ? `<a href="${url}" target="_blank" rel="noreferrer">${label} ↗</a>` : `<span>${label}</span>`}</li>`).join("")}</ul>
     <div class="detail-actions">
       <button type="button" data-copy-link>复制此问题链接</button>
@@ -625,6 +871,7 @@ function renderQuestionDetail() {
   elements.questionDetail.querySelector("[data-copy-outline]").addEventListener("click", () => {
     const outline = [
       `研究问题：${question.title}`,
+      `问题类型：${kindLabels[kind]}`,
       "",
       `为什么重要：${question.why}`,
       "",
@@ -634,7 +881,9 @@ function renderQuestionDetail() {
       "待研究问题：",
       ...question.open.map((item) => `- ${item}`),
       "",
-      `证据等级：${question.evidence}`
+      `证据等级：${question.evidence}`,
+      `外部证据：${linkedEvidence.map((item) => item.id).join("、") || "待补"}`,
+      ...(plan ? ["", "产品研究简报：", `- 目标人群：${plan.target}`, `- 可改变机制：${plan.mechanism}`, `- 软件 / 硬件：${plan.carrier}`, `- 核心指标：${plan.metric}`, `- 最小实验：${plan.experiment}`, `- 决策门槛：${plan.gate}`] : [])
     ].join("\n");
     copyText(outline, "研究提纲已复制");
   });
@@ -674,6 +923,7 @@ async function copyText(text, successMessage) {
 
 function resetFilters() {
   state.domain = "all";
+  state.kind = "all";
   state.status = "all";
   state.search = "";
   renderAll();
@@ -681,6 +931,11 @@ function resetFilters() {
 
 elements.domainFilter.addEventListener("change", (event) => {
   state.domain = event.target.value;
+  renderAll();
+});
+
+elements.kindFilter.addEventListener("change", (event) => {
+  state.kind = event.target.value;
   renderAll();
 });
 
@@ -718,6 +973,7 @@ document.querySelectorAll("[data-nav-action='open-questions']").forEach((link) =
 document.querySelectorAll("[data-nav-action='open-backlog']").forEach((link) => {
   link.addEventListener("click", () => {
     state.domain = "all";
+    state.kind = "all";
     state.status = "backlog";
     state.search = "";
     renderAll();
@@ -733,3 +989,5 @@ if (initialQuestion && getQuestion(initialQuestion)) {
 
 renderAll();
 renderBooks();
+renderEvidence();
+renderPortfolio();
