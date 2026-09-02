@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sleep Research Atlas：用关键问题组织睡眠知识、证据与研究空白。">
+  <meta name="theme-color" content="#17312f">
+  <title>Sleep Research Atlas｜睡眠研究地图</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%2317312f'/%3E%3Cpath d='M43 40c-12 3-22-7-19-19-8 4-12 14-8 23 5 11 20 14 29 5 3-3 5-7 5-11-2 1-4 2-7 2Z' fill='%23fffdf8'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css?v=1.1.0">
+  <script src="app.js?v=1.1.0" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="返回首页">
+      <span class="brand-mark" aria-hidden="true">☾</span>
+      <span>
+        <strong>Sleep Research Atlas</strong>
+        <small>睡眠研究地图</small>
+      </span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">菜单</button>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <a href="#research-map">研究地图</a>
+      <a href="#questions" data-nav-action="open-questions">研究问题</a>
+      <a href="#reading">经典书目</a>
+      <a href="#method">研究方法</a>
+      <a href="#about">关于项目</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Evidence · Questions · Decisions</p>
+        <h1 id="hero-title">关于睡眠，<br>我们知道什么，<br>还有什么不知道。</h1>
+        <p class="hero-lead">以关键问题组织证据、知识点与研究空白，让每一项研究都能支持更好的产品与健康决策。</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#research-map">探索六大板块 <span aria-hidden="true">↓</span></a>
+          <a class="button" href="#questions" data-nav-action="open-questions">查看研究问题</a>
+        </div>
+      </div>
+      <aside class="hero-principle">
+        <p class="overline">Research principle 01</p>
+        <p>事实、共识、假设与个人经验，必须被清楚区分。</p>
+      </aside>
+    </section>
+
+    <section class="current-takes" aria-label="当前核心判断">
+      <article>
+        <span>01</span>
+        <p>单一睡眠分数可以描述结果，但通常无法解释用户为什么睡不好。</p>
+      </article>
+      <article>
+        <span>02</span>
+        <p>科学机制成立、实验室有效和家庭产品有效，是三个不同的问题。</p>
+      </article>
+      <article>
+        <span>03</span>
+        <p>睡眠产品的价值应从监测，逐步走向可验证的主动干预。</p>
+      </article>
+    </section>
+
+    <section class="section research-map" id="research-map" aria-labelledby="map-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Research map</p>
+          <h2 id="map-title">六大研究板块</h2>
+        </div>
+        <p>从机制到长期影响，建立一套可持续更新的睡眠研究结构。点击任一板块进入对应知识与问题。</p>
+      </div>
+      <div class="domain-grid" id="domain-grid"></div>
+    </section>
+
+    <section class="section questions-section" id="questions" aria-labelledby="questions-title">
+      <div class="section-heading questions-heading">
+        <div>
+          <p class="eyebrow">Research questions</p>
+          <h2 id="questions-title">问题库</h2>
+        </div>
+        <p id="questions-description">筛选板块、研究状态或搜索关键词，查看当前答案与研究空白。</p>
+      </div>
+
+      <div class="question-toolbar" aria-label="研究问题筛选">
+        <label class="search-field">
+          <span>搜索</span>
+          <input id="question-search" type="search" placeholder="例如：呼吸、PPG、闭环……" autocomplete="off">
+        </label>
+        <label>
+          <span>板块</span>
+          <select id="domain-filter">
+            <option value="all">全部板块</option>
+          </select>
+        </label>
+        <label>
+          <span>状态</span>
+          <select id="status-filter">
+            <option value="all">全部状态</option>
+            <option value="published">已有研究</option>
+            <option value="researching">研究中</option>
+            <option value="backlog">待研究</option>
+          </select>
+        </label>
+        <button class="text-button" id="reset-filters" type="button">清除筛选</button>
+      </div>
+
+      <div class="question-count" id="question-count" aria-live="polite"></div>
+      <div class="question-layout">
+        <div class="question-list" id="question-list" aria-live="polite"></div>
+        <article class="question-detail" id="question-detail" aria-live="polite"></article>
+      </div>
+    </section>
+
+    <section class="section reading-section" id="reading" aria-labelledby="reading-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Foundational reading</p>
+          <h2 id="reading-title">经典书目，转化成可研究的问题</h2>
+        </div>
+        <p>书籍负责建立认知框架，研究负责验证边界。这里提炼作者的核心主张，并标出它们如何进入六大研究板块。</p>
+      </div>
+      <div class="book-grid" id="book-grid"></div>
+      <p class="reading-note">说明：以下均为原创归纳，不是原文摘录；“书中主张”不等同于本站的最终证据结论。</p>
+    </section>
+
+    <section class="section method-section" id="method" aria-labelledby="method-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Methodology</p>
+          <h2 id="method-title">研究与证据标准</h2>
+        </div>
+        <p>公开每个判断如何形成，也公开它可能错在哪里。</p>
+      </div>
+      <div class="method-grid">
+        <article>
+          <span class="method-number">01</span>
+          <h3>问题定义</h3>
+          <p>先说明研究对象、人群、场景、干预与结果指标，避免用模糊问题得到强结论。</p>
+        </article>
+        <article>
+          <span class="method-number">02</span>
+          <h3>证据分层</h3>
+          <p>系统综述、随机试验、观察研究、专家判断与个人经验分层呈现，不能相互替代。</p>
+        </article>
+        <article>
+          <span class="method-number">03</span>
+          <h3>边界与反例</h3>
+          <p>每个答案同时写出适用边界、相反证据，以及什么新证据会让我们改变观点。</p>
+        </article>
+        <article>
+          <span class="method-number">04</span>
+          <h3>持续更新</h3>
+          <p>页面保留更新时间与变更记录，让“当前最优答案”随着新研究迭代。</p>
+        </article>
+      </div>
+
+      <div class="evidence-scale" aria-label="证据等级">
+        <div><strong>A</strong><span>多项高质量综述或一致性很强的证据</span></div>
+        <div><strong>B</strong><span>多项研究支持，但存在明显异质性</span></div>
+        <div><strong>C</strong><span>初步研究、间接证据或小样本结果</span></div>
+        <div><strong>D</strong><span>专家判断、传统经验或待验证假设</span></div>
+      </div>
+    </section>
+
+    <section class="about-section" id="about" aria-labelledby="about-title">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2 id="about-title">一个持续更新的研究系统，<br>不是一次性睡眠百科。</h2>
+      </div>
+      <div class="about-copy">
+        <p>这个项目把分散的睡眠资料转化为可追溯的知识点、清晰的待研究问题和可以持续修正的答案。</p>
+        <p>1.0 版本优先服务睡眠产品研究、AI Wellness 产品定义、公开内容与专家访谈。</p>
+        <p class="medical-note">内容仅用于研究与知识交流，不用于诊断或替代专业医疗建议。</p>
+        <a class="button button-inverse" href="#questions" data-nav-action="open-backlog">查看待研究问题</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>Sleep Research Atlas</strong>
+      <p>Research in public. Update with evidence.</p>
+    </div>
+    <a href="#top">返回顶部 ↑</a>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
